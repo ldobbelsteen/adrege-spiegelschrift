@@ -10,16 +10,17 @@ export const FlipDocument = () => {
   if (result) {
     return (
       <>
+        <span>{result.name}</span>
         <a href={window.URL.createObjectURL(result)} download={result.name}>
-          <button>Download</button>
+          <button>Opslaan</button>
         </a>
-        <button onClick={() => setResult(undefined)}>Back</button>
+        <button onClick={() => setResult(undefined)}>Terug</button>
       </>
     );
   }
 
   if (loading) {
-    return <LoadingText text="Flipping" />;
+    return <LoadingText text="Flippen" />;
   }
 
   return (

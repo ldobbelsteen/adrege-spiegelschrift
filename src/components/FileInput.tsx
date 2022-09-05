@@ -20,7 +20,7 @@ export const FileInput = (props: { onInput: (file: File) => void }) => {
         ref={inputRef}
       />
       <button type="button" onClick={() => inputRef.current?.click()}>
-        Select
+        Selecteren
       </button>
     </>
   );
