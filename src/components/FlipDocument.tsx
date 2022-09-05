@@ -11,7 +11,9 @@ export const FlipDocument = () => {
     return (
       <>
         <span>{result.name}</span>
-        <a href={window.URL.createObjectURL(result)} download={result.name}>
+        {
+          // eslint-disable-next-line
+        } <a href={window.URL.createObjectURL(result)} download={result.name}>
           <button>Opslaan</button>
         </a>
         <button onClick={() => setResult(undefined)}>Terug</button>
