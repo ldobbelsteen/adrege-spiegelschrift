@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Go Boom!";
-  src: url("./GoBoom.woff2") format("woff2");
+  src: url("../assets/GoBoom.woff2") format("woff2");
 }
 
 $primary-color: #ea0e0e;
@@ -15,10 +15,25 @@ body {
   font-family: "Go Boom!";
   background-color: $primary-color;
   color: $text-color;
+  text-align: center;
 }
 
 a {
   color: inherit;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  max-width: 684px;
 }
 
 button {
@@ -30,6 +45,7 @@ button {
 
   border: none;
   padding: 0.5rem;
+  margin: 0.25rem;
   border-radius: 0.5rem;
 
   &:hover {
@@ -37,17 +53,9 @@ button {
   }
 }
 
-#root {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+section {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: darken($primary-color, 10%);
 }

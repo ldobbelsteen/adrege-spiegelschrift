@@ -1,20 +1,35 @@
 import React, { createRef } from "react";
-import { pdfMime } from "../pdf";
 
-export const FileInput = (props: { onInput: (file: File) => void }) => {
+export const FontFlip = () => {
+  return (
+    <section>
+      <h3>Spiegel een TTF lettertype</h3>
+      <FileInput />
+    </section>
+  );
+};
+
+const FileInput = () => {
   const inputRef = createRef<HTMLInputElement>();
+  const formRef = createRef<HTMLFormElement>();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (ev.currentTarget.files?.length === 1) {
-      props.onInput(ev.currentTarget.files[0]);
+      formRef.current?.submit();
     }
   };
 
   return (
-    <>
+    <form
+      method="post"
+      action="/api/flip-font"
+      encType="multipart/form-data"
+      ref={formRef}
+    >
       <input
+        name="font"
         type="file"
-        accept={pdfMime}
+        accept="font/ttf"
         onChange={handleChange}
         style={{ display: "none" }}
         ref={inputRef}
@@ -22,6 +37,6 @@ export const FileInput = (props: { onInput: (file: File) => void }) => {
       <button type="button" onClick={() => inputRef.current?.click()}>
         Selecteren
       </button>
-    </>
+    </form>
   );
 };

@@ -1,12 +1,17 @@
-import "../styles.scss";
+import "../styles/styles.scss";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { FlipDocument } from "./FlipDocument";
+import { FontFlip } from "./FontFlip";
+import { PdfFlip } from "./PdfFlip";
+import { TextFlip } from "./TextFlip";
 
 const App = () => {
   return (
     <main>
-      <FlipDocument />
+      <h1>Spiegelschrift tools</h1>
+      <PdfFlip />
+      <FontFlip />
+      <TextFlip />
     </main>
   );
 };
