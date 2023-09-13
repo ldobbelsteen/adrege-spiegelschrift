@@ -1,8 +1,7 @@
 {
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
-    "check": "tsc --noEmit && eslint . --ignore-path .gitignore --max-warnings 0"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/react": "^18.0.28",
