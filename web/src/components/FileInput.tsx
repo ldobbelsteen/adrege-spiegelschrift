@@ -1,7 +1,9 @@
 import React, { createRef } from "react";
-import { pdfMime } from "../pdf";
 
-export const FileInput = (props: { onInput: (file: File) => void }) => {
+export const FileInput = (props: {
+  onInput: (file: File) => void;
+  acceptMime: string;
+}) => {
   const inputRef = createRef<HTMLInputElement>();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,13 +16,13 @@ export const FileInput = (props: { onInput: (file: File) => void }) => {
     <>
       <input
         type="file"
-        accept={pdfMime}
+        accept={props.acceptMime}
         onChange={handleChange}
         style={{ display: "none" }}
         ref={inputRef}
       />
       <button type="button" onClick={() => inputRef.current?.click()}>
-        Selecteren
+        Bestand selecteren
       </button>
     </>
   );

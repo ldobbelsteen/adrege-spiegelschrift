@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "GoBoom";
+  src: url("../assets/GoBoom.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "mooBoG";
+  src: url("../assets/mooBoG.woff2") format("woff2");
+}
+
+$primary-color: #ea0e0e;
+$text-color: white;
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: larger;
+  font-family: "GoBoom";
+  background-color: $primary-color;
+  color: $text-color;
+  text-align: center;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  max-width: 684px;
+}
+
+button {
+  color: inherit;
+  background-color: darken($primary-color, 20%);
+
+  font-size: inherit;
+  font-family: inherit;
+
+  border: none;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: darken($primary-color, 40%);
+  }
+}
+
+section {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: darken($primary-color, 10%);
+}
