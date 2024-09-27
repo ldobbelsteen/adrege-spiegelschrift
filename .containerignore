@@ -1,2 +1,5 @@
 /archive
 /flip
+/venv
+
+*.ttf
