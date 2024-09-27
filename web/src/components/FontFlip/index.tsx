@@ -10,7 +10,12 @@ export const FontFlip = () => {
     <section>
       <h3>Spiegel een TTF lettertype</h3>
       {result ? (
-        <DownloadFile file={result} discard={() => setResult(undefined)} />
+        <DownloadFile
+          file={result}
+          discard={() => {
+            setResult(undefined);
+          }}
+        />
       ) : loading ? (
         <span>Bezig...</span>
       ) : (
@@ -20,8 +25,12 @@ export const FontFlip = () => {
             setLoading(true);
             flipFont(file)
               .then(setResult)
-              .finally(() => setLoading(false))
-              .catch(console.error);
+              .finally(() => {
+                setLoading(false);
+              })
+              .catch((e: unknown) => {
+                console.error(e);
+              });
           }}
         />
       )}
@@ -39,7 +48,12 @@ const flipFont = async (file: File): Promise<File> => {
   const filename = response.headers
     .get("Content-Disposition")
     ?.split("filename=")[1]
-    .split(";")[0] as string;
+    .split(";")[0];
+
+  if (!filename) {
+    throw new Error("no filename found in response headers");
+  }
+
   const blob = await response.blob();
   return new File([blob], filename);
 };

@@ -11,7 +11,12 @@ export const PdfFlip = () => {
     <section>
       <h3>Spiegel een PDF document</h3>
       {result ? (
-        <DownloadFile file={result} discard={() => setResult(undefined)} />
+        <DownloadFile
+          file={result}
+          discard={() => {
+            setResult(undefined);
+          }}
+        />
       ) : loading ? (
         <span>Bezig...</span>
       ) : (
@@ -21,8 +26,12 @@ export const PdfFlip = () => {
             setLoading(true);
             flipPdf(file)
               .then(setResult)
-              .finally(() => setLoading(false))
-              .catch(console.error);
+              .finally(() => {
+                setLoading(false);
+              })
+              .catch((e: unknown) => {
+                console.error(e);
+              });
           }}
         />
       )}

@@ -1,12 +1,24 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "allowJs": true,
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "lib": [
       "dom",
       "esnext",
     ],
-    "strict": true
-  }
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "out",
+    "skipLibCheck": true,
+    "strict": true,
+    "types": [
+      "vite/client"
+    ],
+  },
+  "include": [
+    "*.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+  ],
 }

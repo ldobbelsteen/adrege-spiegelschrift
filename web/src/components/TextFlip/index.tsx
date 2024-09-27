@@ -7,7 +7,7 @@ export const TextFlip = () => {
   const injectFlipUnicode = (text: string) =>
     text
       .split("\n")
-      .map((s) => (s.charAt(0) != "‮" ? "‮" + s : s))
+      .map((s) => (!s.startsWith("‮") ? "‮" + s : s))
       .join("\n");
 
   const removeFlipUnicode = (text: string) =>
@@ -37,13 +37,20 @@ export const TextFlip = () => {
           fontFamily: spieken ? "GoBoom" : "mooBoG",
           textAlign: spieken ? "left" : "right",
         }}
-        onChange={(ev) =>
-          spieken
-            ? setInput(ev.target.value)
-            : setInput(injectFlipUnicode(ev.target.value))
-        }
+        onChange={(ev) => {
+          if (spieken) {
+            setInput(ev.target.value);
+          } else {
+            setInput(injectFlipUnicode(ev.target.value));
+          }
+        }}
       ></textarea>
-      <button type="button" onClick={() => setSpieken((s) => !s)}>
+      <button
+        type="button"
+        onClick={() => {
+          setSpieken((s) => !s);
+        }}
+      >
         {spieken ? "Spieken uitzetten" : "Spieken aanzetten"}
       </button>
     </section>
