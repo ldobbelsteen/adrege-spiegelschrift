@@ -17,4 +17,5 @@ RUN pip install --no-cache-dir --upgrade pip \
 COPY font.py /font.py
 COPY --from=web-builder /build/dist /web/dist
 COPY --from=bin-builder /build/flip /usr/bin/flip
+EXPOSE 1235
 CMD ["flip"]
