@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import { createRef } from "react";
 
 export const FileInput = (props: {
   onInput: (file: File) => void;

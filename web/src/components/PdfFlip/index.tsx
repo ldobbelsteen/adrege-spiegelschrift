@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-import React, { useState } from "react";
+import { useState } from "react";
 import { DownloadFile } from "../DownloadFile";
 import { FileInput } from "../FileInput";
 
@@ -44,13 +44,12 @@ const flipPdf = async (file: File): Promise<File> => {
   const document = await PDFDocument.load(data);
 
   const pages = document.getPages();
-  pages.forEach((page) => {
+  for (const page of pages) {
     page.scale(-1, 1);
-  });
+  }
 
   const flippedData = await document.save();
-  const flippedName =
-    file.name.split(".").slice(0, -1).join("") + "-flipped.pdf";
+  const flippedName = `${file.name.split(".").slice(0, -1).join("")}-flipped.pdf`;
   const flippedFile = new File([flippedData], flippedName, {
     type: file.type,
   });

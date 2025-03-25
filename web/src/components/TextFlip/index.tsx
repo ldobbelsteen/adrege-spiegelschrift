@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+function injectFlipUnicode(text: string) {
+  return text
+    .split("\n")
+    .map((s) => (!s.startsWith("‮") ? `‮${s}` : s))
+    .join("\n");
+}
+
+function removeFlipUnicode(text: string) {
+  return text
+    .split("\n")
+    .map((s) => s.slice(1))
+    .join("\n");
+}
 
 export const TextFlip = () => {
   const [input, setInput] = useState("‮");
   const [spieken, setSpieken] = useState(false);
-
-  const injectFlipUnicode = (text: string) =>
-    text
-      .split("\n")
-      .map((s) => (!s.startsWith("‮") ? "‮" + s : s))
-      .join("\n");
-
-  const removeFlipUnicode = (text: string) =>
-    text
-      .split("\n")
-      .map((s) => s.slice(1))
-      .join("\n");
 
   useEffect(() => {
     if (spieken) {
@@ -44,7 +46,7 @@ export const TextFlip = () => {
             setInput(injectFlipUnicode(ev.target.value));
           }
         }}
-      ></textarea>
+      />
       <button
         type="button"
         onClick={() => {

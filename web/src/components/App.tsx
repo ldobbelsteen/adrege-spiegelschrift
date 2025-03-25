@@ -1,5 +1,4 @@
 import "../styles/styles.scss";
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { FontFlip } from "./FontFlip";
 import { PdfFlip } from "./PdfFlip";

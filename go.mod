@@ -1,3 +1,3 @@
-module github.com/ldobbelsteen/flip
+module github.com/ldobbelsteen/adrege-spiegelschrift
 
-go 1.22
+go 1.23
