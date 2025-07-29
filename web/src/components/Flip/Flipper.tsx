@@ -104,7 +104,7 @@ export const Flipper = () => {
               {...results.length === 0 ? { disabled: true } : {}}
               onClick={() => setResults([])}
             >
-              <i className="bi bi-x-circle me-2"></i>Alles verwijderen
+              <i className="bi bi-x-circle me-2"></i>Verwijder alles
             </button>
           </div>
         </div>
