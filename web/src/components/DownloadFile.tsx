@@ -7,11 +7,11 @@ export const DownloadFile = (props: { file: File; discard: () => void }) => {
         href={window.URL.createObjectURL(props.file)}
         download={props.file.name}
       >
-        <button className="btn btn-secondary" type="button">
+        <button className="btn btn-outline-light" type="button">
           <i className="bi bi-download"></i>
         </button>
       </a>
-      <button className="btn btn-secondary" type="button" onClick={props.discard}>
+      <button className="btn btn-outline-light" type="button" onClick={props.discard}>
         <i className="bi bi-trash"></i>
       </button>
     </div>
