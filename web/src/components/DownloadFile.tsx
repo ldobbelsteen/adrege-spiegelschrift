@@ -1,7 +1,7 @@
-export const DownloadFile = (props: { file: File; discard: () => void }) => {
+export const DownloadFile = (props: { name: string, file: File; discard: () => void }) => {
   return (
     <div className="d-flex gap-2 align-items-center w-100">
-      <span>{props.file.name.replace("-flipped", "")}</span>
+      <span>{props.name}</span>
       <a
       className="ms-auto"
         href={window.URL.createObjectURL(props.file)}

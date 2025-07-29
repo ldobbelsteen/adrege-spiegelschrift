@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { DownloadFile } from "../DownloadFile";
 import { FileInput } from "../FileInput";
@@ -7,8 +6,13 @@ import JSZip from "jszip";
 import { flipPdf } from "./FlipPdf";
 import { flipTtf } from "./FlipTtf";
 
+type FlippedResult = {
+  originalName: string;
+  file: File;
+};
+
 export const Flipper = () => {
-  const [results, setResults] = useState<File[]>([]);
+  const [results, setResults] = useState<FlippedResult[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleFiles = async (files: File[]) => {
@@ -17,13 +21,15 @@ export const Flipper = () => {
       const processed = await Promise.all(
         files.map(async (file) => {
           if (file.type === "application/pdf" || file.name.endsWith(".pdf")) {
-            return await flipPdf(file);
+            const flipped = await flipPdf(file);
+            return { originalName: file.name, file: flipped };
           } else if (
             file.type === "font/ttf" ||
             file.name.endsWith(".ttf") ||
             file.type === "application/x-font-ttf"
           ) {
-            return await flipTtf(file);
+            const flipped = await flipTtf(file);
+            return { originalName: file.name, file: flipped };
           }
           // Ignore unsupported files
           return null;
@@ -31,7 +37,7 @@ export const Flipper = () => {
       );
       setResults((prev) => [
         ...prev,
-        ...processed.filter((f): f is File => !!f),
+        ...processed.filter((f): f is FlippedResult => !!f),
       ]);
     } catch (e) {
       console.error(e);
@@ -42,8 +48,8 @@ export const Flipper = () => {
 
   const handleDownloadAll = async () => {
     const zip = new JSZip();
-    for (const file of results) {
-      zip.file(file.name, file);
+    for (const result of results) {
+      zip.file(result.file.name, result.file);
     }
     const blob = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(blob);
@@ -66,35 +72,40 @@ export const Flipper = () => {
         />
         <div className="d-flex flex-column gap-2 w-100">
           {/* Downloads */}
-          {results.map((file, idx) => (
-            <DownloadFile
-              key={file.name + idx}
-              file={file}
-              discard={() => setResults(results.filter((_, i) => i !== idx))}
-            />
+          {results.map((result, idx) => (
+            <div
+              key={result.file.name + idx}
+              className="d-flex align-items-center w-100 gap-2"
+            >
+              <DownloadFile
+                name={result.originalName}
+                file={result.file}
+                discard={() =>
+                  setResults(results.filter((_, i) => i !== idx))
+                }
+              />
+            </div>
           ))}
           {loading && <span>Bezig...</span>}
-          
+
           <div className="w-100 d-flex gap-2 justify-content-end mt-auto">
-            {/* Download all  */}
-            {results.length > 1 && (
-              <>
-                <button
-                  className="btn btn-outline-light"
-                  type="button"
-                  onClick={handleDownloadAll}
-                >
-                  <i className="bi bi-download me-2"></i>Download alles
-                </button>
-                <button
-                  className="btn btn-outline-light"
-                  type="button"
-                  onClick={() => setResults([])}
-                >
-                  <i className="bi bi-x-circle me-2"></i>Alles verwijderen
-                </button>
-              </>
-            )}
+            {/* Download all and Clear all */}
+            <button
+              className="btn btn-outline-light"
+              type="button"
+              {...results.length === 0 ? { disabled: true } : {}}
+              onClick={handleDownloadAll}
+            >
+              <i className="bi bi-download me-2"></i>Download alles
+            </button>
+            <button
+              className="btn btn-outline-light"
+              type="button"
+              {...results.length === 0 ? { disabled: true } : {}}
+              onClick={() => setResults([])}
+            >
+              <i className="bi bi-x-circle me-2"></i>Alles verwijderen
+            </button>
           </div>
         </div>
       </div>
