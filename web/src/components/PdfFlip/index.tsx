@@ -8,7 +8,7 @@ export const PdfFlip = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <section>
+    <section className="bg-primary text-white p-3 rounded d-flex flex-column align-items-start gap-2">
       <h3>Spiegel een PDF document</h3>
       {result ? (
         <DownloadFile

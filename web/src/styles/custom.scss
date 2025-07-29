@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "GoBoom";
+  src: url("../assets/GoBoom.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "mooBoG";
+  src: url("../assets/mooBoG.woff2") format("woff2");
+}
+
+html,
+body {
+  font-family: "GoBoom";
+  background-color: lighten($primary, 20%);
+  color: $primary-text;
+}

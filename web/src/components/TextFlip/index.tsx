@@ -27,9 +27,10 @@ export const TextFlip = () => {
   }, [spieken]);
 
   return (
-    <section>
+    <section className="bg-primary text-white p-3 rounded d-flex flex-column align-items-start gap-2">
       <h3>Schrijft tekst in spiegelschrift</h3>
       <textarea
+        className="form-control"
         value={input}
         style={{
           width: "100%",
@@ -48,6 +49,7 @@ export const TextFlip = () => {
         }}
       />
       <button
+        className="btn btn-secondary"
         type="button"
         onClick={() => {
           setSpieken((s) => !s);

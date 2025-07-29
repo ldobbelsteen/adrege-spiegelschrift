@@ -21,7 +21,7 @@ export const FileInput = (props: {
         style={{ display: "none" }}
         ref={inputRef}
       />
-      <button type="button" onClick={() => inputRef.current?.click()}>
+      <button className="btn btn-secondary" type="button" onClick={() => inputRef.current?.click()}>
         Bestand selecteren
       </button>
     </>
