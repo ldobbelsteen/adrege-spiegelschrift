@@ -23,7 +23,7 @@ export const PdfFlip = () => {
   };
 
   return (
-    <section className="bg-primary text-white p-3 rounded d-flex flex-column align-items-start gap-2">
+    <section className="bg-primary text-white p-3 rounded-end rounded-bottom d-flex flex-column align-items-start gap-2">
       <h3>Spiegel PDF documenten</h3>
       <div className="d-flex gap-4 w-100">
         <FileInput

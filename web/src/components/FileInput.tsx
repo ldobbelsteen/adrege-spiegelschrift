@@ -24,7 +24,7 @@ export const FileInput = (props: {
   return (
     <div{...getRootProps()} className="w-100">
       <div 
-          className={`d-flex flex-column align-items-center justify-content-center border border-5 border-secondary rounded-3 bg-primary-subtle py-5 px-4 transition ${isDragActive ? "bg-primary" : ""}`}
+          className={`d-flex flex-column align-items-center justify-content-center border border-5 border-secondary rounded-3 py-5 px-4 transition ${isDragActive ? "bg-light" : "bg-primary-subtle"}`}
           style={{ cursor: "pointer", minHeight: 180, borderStyle: "dotted" }}>
         <input
           {...getInputProps()}

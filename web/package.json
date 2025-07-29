@@ -15,6 +15,7 @@
     "jszip": "^3.10.1",
     "pdf-lib": "^1.17.1",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "sass": "^1.86.0",
