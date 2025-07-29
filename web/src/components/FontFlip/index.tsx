@@ -3,37 +3,39 @@ import { DownloadFile } from "../DownloadFile";
 import { FileInput } from "../FileInput";
 
 export const FontFlip = () => {
-  const [result, setResult] = useState<File>();
+  const [results, setResults] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
 
   return (
     <section className="bg-primary text-white p-3 rounded d-flex flex-column align-items-start gap-2">
       <h3>Spiegel een TTF lettertype</h3>
-      {result ? (
-        <DownloadFile
-          file={result}
-          discard={() => {
-            setResult(undefined);
-          }}
-        />
-      ) : loading ? (
-        <span>Bezig...</span>
-      ) : (
+      <div className="d-flex gap-4 w-100">
         <FileInput
           acceptMime="font/ttf"
-          onInput={(file) => {
+          multiple
+          onInput={async (files) => {
             setLoading(true);
-            flipFont(file)
-              .then(setResult)
-              .finally(() => {
-                setLoading(false);
-              })
-              .catch((e: unknown) => {
-                console.error(e);
-              });
+            try {
+              const flippedFiles = await Promise.all(files.map(flipFont));
+              setResults((prev) => [...prev, ...flippedFiles]);
+            } catch (e) {
+              console.error(e);
+            } finally {
+              setLoading(false);
+            }
           }}
         />
-      )}
+        <div className="w-100 d-flex flex-column gap-2">
+          {loading && <span>Bezig...</span>}
+          {results.map((file, idx) => (
+            <DownloadFile
+              key={file.name + idx}
+              file={file}
+              discard={() => setResults(results.filter((_, i) => i !== idx))}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
