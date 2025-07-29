@@ -5,10 +5,8 @@ $primary: #ea0e0e;
 $secondary: darken(#ea0e0e, 10%);
 
 $nav-tabs-link-active-color: white;
-$nav-tabs-link-active-bg: $primary;
-$nav-tabs-border-color: #ea0e0e00;
-$nav-tabs-link-hover-border-color: $primary;
-$nav-tabs-link-active-border-color: $primary;
+$nav-tabs-link-active-bg: $primary; 
+$nav-tabs-border-width: 0;
 
 // Load the entire Bootstrap library
 @import "../../node_modules/bootstrap/scss/bootstrap";

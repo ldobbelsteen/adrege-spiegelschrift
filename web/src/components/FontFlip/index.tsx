@@ -26,7 +26,6 @@ export const FontFlip = () => {
           }}
         />
         <div className="w-100 d-flex flex-column gap-2">
-          {loading && <span>Bezig...</span>}
           {results.map((file, idx) => (
             <DownloadFile
               key={file.name + idx}
@@ -34,6 +33,7 @@ export const FontFlip = () => {
               discard={() => setResults(results.filter((_, i) => i !== idx))}
             />
           ))}
+          {loading && <span>Bezig...</span>}
         </div>
       </div>
     </section>
