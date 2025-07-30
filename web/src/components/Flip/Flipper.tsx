@@ -61,9 +61,10 @@ export const Flipper = () => {
   };
 
   return (
-    <section className="bg-primary text-white p-3 rounded-end rounded-bottom d-flex flex-column align-items-start gap-2">
+    <section className="bg-primary text-white p-3 rounded-end rounded-bottom d-flex flex-column gap-2"
+      style={{ height: "75vh" }}>
       <h3>Spiegel bestanden</h3>
-      <div className="w-100 d-flex gap-2">
+      <div className="w-100 d-flex gap-2 h-100">
         {/* File input */}
         <FileInput
           acceptMime=".pdf,.ttf,application/pdf,font/ttf"
@@ -71,25 +72,28 @@ export const Flipper = () => {
           onInput={handleFiles}
         />
         <div className="d-flex flex-column gap-2 w-100">
-          {/* Downloads */}
-          {results.map((result, idx) => (
-            <div
-              key={result.file.name + idx}
-              className="d-flex align-items-center w-100 gap-2"
-            >
-              <DownloadFile
-                name={result.originalName}
-                file={result.file}
-                discard={() =>
-                  setResults(results.filter((_, i) => i !== idx))
-                }
-              />
-            </div>
-          ))}
-          {loading && <span>Bezig...</span>}
+          <div className="d-flex flex-column gap-2 p-2 border border-3 border-secondary rounded h-100">
+            {/* Downloads */}
+            {results.map((result, idx) => (
+              <div
+                key={result.file.name + idx}
+                className="d-flex align-items-center w-100 gap-2"
+              >
+                <DownloadFile
+                  name={result.originalName}
+                  file={result.file}
+                  discard={() =>
+                    setResults(results.filter((_, i) => i !== idx))
+                  }
+                />
+              </div>
+            ))}
+            {loading && <span>Bezig...</span>}
+          </div>
 
-          <div className="w-100 d-flex gap-2 justify-content-end mt-auto">
+          <div className="w-100 d-flex gap-2 justify-content-end align-items-center mt-auto">
             {/* Download all and Clear all */}
+            <span className="me-auto">{results.length} item{results.length === 1 ? "" : "s"}</span>
             <button
               className="btn btn-outline-light"
               type="button"
