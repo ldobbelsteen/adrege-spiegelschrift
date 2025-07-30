@@ -5,6 +5,7 @@ import JSZip from "jszip";
 
 import { flipPdf } from "./FlipPdf";
 import { flipTtf } from "./FlipTtf";
+import { convertDocxToPdf } from "./DocxToPdf"; 
 
 type FlippedResult = {
   originalName: string;
@@ -20,18 +21,29 @@ export const Flipper = () => {
     try {
       const processed = await Promise.all(
         files.map(async (file) => {
-          if (file.type === "application/pdf" || file.name.endsWith(".pdf")) {
-            const flipped = await flipPdf(file);
-            return { originalName: file.name, file: flipped };
-          } else if (
-            file.type === "font/ttf" ||
-            file.name.endsWith(".ttf") ||
-            file.type === "application/x-font-ttf"
-          ) {
-            const flipped = await flipTtf(file);
-            return { originalName: file.name, file: flipped };
+          const ext = file.name.toLowerCase();
+          try {
+            if (file.type === "application/pdf" || ext.endsWith(".pdf")) {
+              const flipped = await flipPdf(file);
+              return { originalName: file.name, file: flipped };
+            } else if (
+              file.type === "font/ttf" ||
+              ext.endsWith(".ttf") ||
+              file.type === "application/x-font-ttf"
+            ) {
+              const flipped = await flipTtf(file);
+              return { originalName: file.name, file: flipped };
+            } else if (
+              file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+              ext.endsWith(".docx")
+            ) {
+              const pdf = await convertDocxToPdf(file);
+              const flipped = await flipPdf(pdf);
+              return { originalName: file.name, file: flipped };
+            }
+          } catch (err) {
+            console.error("Error processing file:", file.name, err);
           }
-          // Ignore unsupported files
           return null;
         })
       );
@@ -67,7 +79,7 @@ export const Flipper = () => {
       <div className="w-100 d-flex gap-2 h-100">
         {/* File input */}
         <FileInput
-          acceptMime=".pdf,.ttf,application/pdf,font/ttf"
+          acceptMime=".pdf,.ttf,.docx,application/pdf,font/ttf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           multiple
           onInput={handleFiles}
         />
@@ -116,5 +128,3 @@ export const Flipper = () => {
     </section>
   );
 };
-
-
