@@ -84,7 +84,8 @@ export const Flipper = () => {
           onInput={handleFiles}
         />
         <div className="d-flex flex-column gap-2 w-100">
-          <div className="d-flex flex-column gap-2 p-2 border border-3 border-secondary rounded h-100">
+          <div className="d-flex flex-column gap-2 p-2 border border-3 border-secondary rounded overflow-auto"
+            style={{ height: "80%" }}>
             {/* Downloads */}
             {results.map((result, idx) => (
               <div
@@ -103,7 +104,7 @@ export const Flipper = () => {
             {loading && <span>Bezig...</span>}
           </div>
 
-          <div className="w-100 d-flex gap-2 justify-content-end align-items-center mt-auto">
+          <div className="w-100 d-flex gap-2 justify-content-end align-items-center">
             {/* Download all and Clear all */}
             <span className="me-auto">{results.length} item{results.length === 1 ? "" : "s"}</span>
             <button
