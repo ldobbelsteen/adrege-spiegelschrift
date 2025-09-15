@@ -5,7 +5,7 @@ RUN npm ci
 COPY web .
 RUN npm run build
 
-FROM golang:1.23-bookworm AS bin-builder
+FROM golang:1.25-bookworm AS bin-builder
 WORKDIR /build
 COPY . .
 RUN go build .
