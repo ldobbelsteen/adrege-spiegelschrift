@@ -7,7 +7,7 @@
     "check": "tsc && biome check ."
   },
   "dependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.2.4",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "bootstrap": "^5.3.7",
